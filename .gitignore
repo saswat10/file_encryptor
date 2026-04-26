@@ -1,0 +1,5 @@
+**/test/
+*.o
+.env
+build/
+bin/

@@ -10,6 +10,16 @@ ProcessManagement::ProcessManagement() {}
 bool ProcessManagement::sumbitToQueue(std::unique_ptr<Task> task)
 {
     taskQueue.push(std::move(task));
+	int pid = fork();
+	if(pid < 0) {
+		return false;
+	} else if(pid > 0) {
+		std::cout << "Entering the parent process" << std::endl;
+	} else {
+		std::cout << "Entering the child process" << std::endl;
+		executeTask();
+		std::cout << "Exiting the child process" << std::endl;
+	}
     return true;
 }
 

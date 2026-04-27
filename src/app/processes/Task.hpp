@@ -25,7 +25,7 @@ struct Task {
     std::string toString() 
     {
         std::ostringstream oss;
-        oss << filePath << "," << (action == Action::ENCRYPT) ? "ENCRYPT" : "DECRYPT";
+        oss << filePath << "," << (action == Action::ENCRYPT ? "ENCRYPT" : "DECRYPT");
         return oss.str();
     }
 

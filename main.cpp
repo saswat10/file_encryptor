@@ -3,18 +3,19 @@
 #include <filesystem>
 #include <iostream>
 #include <memory>
+#include <algorithm>
 
 namespace fs = std::filesystem;
 
 int main(int argc, char *argv[]) {
   std::string directory;
-  std::string action;
+  int action;
 
   std::cout << "Enter the directory path: " << std::endl;
   std::getline(std::cin, directory);
 
-  std::cout << "Enter the action (encrypt/decrypt): " << std::endl;
-  std::getline(std::cin, action);
+  std::cout << "Enter the action (0 - encrypt, 1 - decrypt): " << std::endl;
+  std::cin >> action;
 
   try {
     if (fs::exists(directory) && fs::is_directory(directory)) {
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
           std::fstream f_stream = std::move(io.getFileStream());
           if (f_stream.is_open()) {
             Action taskAction =
-                (action == "ENCRYPT" ? Action::ENCRYPT : Action::DECRYPT);
+                (action == 0 ? Action::ENCRYPT : Action::DECRYPT);
             auto task = std::make_unique<Task>(std::move(f_stream), taskAction,
                                                filePath);
             processManagement.sumbitToQueue(std::move(task));

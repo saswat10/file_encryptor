@@ -3,3 +3,6 @@
 .env
 build/
 bin/
+encrypt_decrypt
+cryption
+*vgcore*
